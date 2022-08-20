@@ -4,15 +4,15 @@ const jwt=require('jsonwebtoken')
 const userSchema=Schema({
     number:{
         type:String,
-        // required:true
+        required:true
     },
     email:{
         type:String,
-        // required:true,
+        required:true,
     },
     password:{
         type:String,
-        // required:true
+        required:true
     }
 },{timestamps:true})
 
