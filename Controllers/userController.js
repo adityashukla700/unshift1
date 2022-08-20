@@ -46,7 +46,8 @@ module.exports.signUp=async(req,res)=>{
     const salt=await bcrypt.genSalt(10)
     otp.otp=await bcrypt.hash(otp.otp,salt)
     const result=await otp.save()
-    return res.status(200).send('Otp send successfully check your email!!')
+    return res.status(200).send({
+        message:'Otp send successfully check your email!!'})
 
 }
 
@@ -54,7 +55,7 @@ module.exports.verifyOtp=async(req,res)=>{
     const otpHolder=await Otp.find({
         email:req.body.email
     })
-    if(otpHolder.length===0) return res.status(400).send('You are using expired otp!!')
+    if(otpHolder.length===0) return res.status(400).send({message:'You are using expired otp!!'})
     const rightOtpFind=otpHolder[otpHolder.length-1]
     const validUser=await bcrypt.compare(req.body.otp,rightOtpFind.otp)
     
@@ -77,7 +78,7 @@ module.exports.verifyOtp=async(req,res)=>{
 
     }
     else{
-        return res.status(400).send('Your otp is wrong!!')
+        return res.status(400).send({message:'Your otp is wrong!!'})
     }
 }
 
@@ -91,7 +92,7 @@ module.exports.singIn=async(req,res)=>{
         })
     }
     else{
-        res.status(404).send({
+        res.status(400).send({
             message:"wrong credentials"
         })
     }
