@@ -26,7 +26,7 @@ module.exports.customUrl=async(req,res)=>{
     //       urlObject.save()
     //       res.send(urlObject)
     // });
-    res.send({message:"aditya shukla"})
+    res.send({message:"aditya shukla"});
 
 }
 module.exports.displayUrls=async(req,res)=>{
