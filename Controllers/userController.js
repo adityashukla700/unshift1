@@ -8,9 +8,10 @@ const {Otp}=require('../Model/otpModel')
 
 module.exports.signUp=async(req,res)=>{
     const user=await User.findOne({
-        number:req.body.number,
+        email:req.body.email,
     })
-    if(user) return res.status(400).send('User already registered')
+    if(user) return res.status(400).send({message:'User already registered'})
+    
     const OTP=otpGenerator.generate(6,{
         digits:true,lowerCaseAlphabets:false,upperCaseAlphabets:false,
         specialChars:false
